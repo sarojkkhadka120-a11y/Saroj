@@ -1,5 +1,7 @@
 /* Original idea and inspiration for the Book Cover Effect by https://codepen.io/realvjy */
-
+body {
+  cursor: url('cursor.png') 16 16, auto;
+}
 :root {
   /* Light mode variables */
   --bg-color: #ffffff;
