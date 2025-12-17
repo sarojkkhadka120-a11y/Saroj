@@ -509,11 +509,36 @@ body {
 
 /* base card */
 .case-card {
-  border-radius: 14px;
-  padding: 28px;
-  box-shadow: 0 4px 4px rgba(0,0,0,0.08);
+  position: relative;
   overflow: hidden;
 }
+
+.fw-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(10, 10, 30, 0.55);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.case-card.has-overlay:hover .fw-overlay {
+  opacity: 1;
+}
+
+.fw-cta {
+  background: #6c4cff;
+  color: #fff;
+  padding: 12px 20px;
+  border-radius: 8px;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
 
 /* background colors */
 .case-card--mint { background: #b0ead9; }
@@ -1107,4 +1132,57 @@ body {
 .contact-social-icon .fa-dribbble{
   font-size: 1.6rem;
   color: #ea4c89;
+}
+
+/* Card base */
+.fw-card {
+  position: relative;
+  overflow: hidden;
+}
+
+/* Overlay */
+.fw-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(10, 10, 30, 0.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.35s ease;
+}
+
+/* CTA button */
+.fw-cta {
+  background: #6c4cff;
+  color: white;
+  padding: 12px 20px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 14px;
+  letter-spacing: 0.4px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transform: translateY(12px) scale(0.95);
+  transition: transform 0.35s ease;
+}
+
+/* Hover interaction */
+.fw-card:hover .fw-overlay {
+  opacity: 1;
+}
+
+.fw-card:hover .fw-cta {
+  transform: translateY(0) scale(1);
+}
+
+.case-card.has-overlay {
+  position: relative;
+  overflow: hidden;
+}
+
+.case-card.has-overlay:hover .fw-overlay {
+  opacity: 1;
 }
