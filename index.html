@@ -31,7 +31,7 @@
     <a href="#projects" class="nav__link">Projects</a>
     <a href="#experience" class="nav__link">Experience</a>
     <a href="Resume-Saroj-Khadka.pdf" class="nav__link" download>Resume</a>
-    <a href="Resume-Saroj-Khadka.pdf" class="nav__link" download>Resume</a>
+    <a href="pdfs/flogo Case-Study.pdf" class="nav__link" download>Case Study</a>
   </nav>
 </header>
 
@@ -198,28 +198,48 @@
         </div>
       </article>
 
-      <!-- Flogo (medium) -->
-      <article class="case-card case-card--soft-grey case--medium">
-        <div class="case-media-wrap">
-          <img src="mobile3.png" alt="Flogo logo analysis tool" class="case-media" />
-        </div>
-        <div class="case-text">
-          <h3 class="case-heading">Flogo</h3>
-          <p class="case-subtitle">AI powered logo analysis tool</p>
-        </div>
-      </article>
+     <!-- Flogo (medium) -->
+<article class="case-card case-card--soft-grey case--medium has-overlay js-case-pdf"
+         data-pdf="pdfs/flogo.pdf">
+
+  <div class="case-media-wrap">
+    <img src="mobile3.png" alt="Flogo logo analysis tool" class="case-media" />
+  </div>
+
+  <div class="case-text">
+    <h3 class="case-heading">Flogo</h3>
+    <p class="case-subtitle">AI powered logo analysis tool</p>
+  </div>
+
+  <!-- Hover overlay -->
+  <div class="fw-overlay">
+    <span class="fw-cta">
+      👁 VIEW CASE STUDY
+    </span>
+  </div>
+</article>
+
 
       <!-- Photography (big) -->
-      <article class="case-card case-card--violet case--big">
-        <div class="case-media-wrap case-media-wrap--photo">
-          <img src="mobile5.png" alt="My Photography Compositions" class="case-media" />
-        </div>
-        <div class="case-text">
-          <h3 class="case-heading">My Photography Compositions</h3>
-          <p class="case-subtitle">The techniques I use to captures</p>
-        </div>
-      </article>
-    </div>
+     <!-- Photography (big) -->
+<article class="case-card case-card--violet case--big has-overlay is-disabled">
+  <div class="case-media-wrap case-media-wrap--photo">
+    <img src="mobile5.png" alt="My Photography Compositions" class="case-media" />
+  </div>
+
+  <div class="case-text">
+    <h3 class="case-heading">My Photography Compositions</h3>
+    <p class="case-subtitle">The techniques I use to captures</p>
+  </div>
+
+  <!-- Coming soon overlay -->
+  <div class="fw-overlay">
+    <span class="fw-cta fw-cta--disabled">
+      ⏳ COMING SOON
+    </span>
+  </div>
+</article>
+
 
     <!-- RIGHT COLUMN -->
     <div class="masonry-col">
@@ -460,21 +480,27 @@
   <div class="fw-grid">
 
     <!-- Card 1 -->
-    <article class="fw-card">
-      <div class="fw-card-inner">
-        <div class="fw-photo">
-          <img src="empathy.png" alt="Empathy mapping framework" />
-        </div>
+    <article class="fw-card js-fw-pdf" data-pdf="pdfs/Empathy-map.pdf">
+  <div class="fw-card-inner">
+    <div class="fw-photo">
+      <img src="empathy.png" alt="Empathy mapping framework" />
+    </div>
 
-        <div class="fw-text">
-          <h3 class="fw-heading">Empathy Mapping</h3>
-          <p class="fw-pill">Feel what your users feel</p>
-        </div>
-      </div>
-    </article>
+    <div class="fw-text">
+      <h3 class="fw-heading">Empathy Mapping</h3>
+      <p class="fw-pill">Feel what your users feel</p>
+    </div>
+  </div>
+
+  <div class="fw-overlay">
+    <span class="fw-cta">
+      VIEW CASE STUDY
+    </span>
+  </div>
+</article>
 
     <!-- Card 2 -->
-    <article class="fw-card">
+    <article class="fw-card js-fw-pdf" data-pdf="pdfs/userpersona.pdf">
       <div class="fw-card-inner">
         <div class="fw-photo">
           <img src="user.png" alt="User persona framework" />
@@ -485,10 +511,15 @@
           <p class="fw-pill">See your users. Build for them</p>
         </div>
       </div>
-    </article>
+   <div class="fw-overlay">
+    <span class="fw-cta">
+      VIEW CASE STUDY
+    </span>
+  </div>
+</article>
 
     <!-- Card 3 -->
-    <article class="fw-card">
+    <article class="fw-card js-fw-pdf" data-pdf="pdfs/User Journey.pdf">
       <div class="fw-card-inner">
         <div class="fw-photo">
           <img src="journey.png" alt="Customer journey mapping framework" />
@@ -499,10 +530,15 @@
           <p class="fw-pill">Mapping moments. Improving experiences</p>
         </div>
       </div>
-    </article>
+    <div class="fw-overlay">
+    <span class="fw-cta">
+      VIEW CASE STUDY
+    </span>
+  </div>
+</article>
 
     <!-- Card 4 -->
-    <article class="fw-card">
+    <article class="fw-card js-fw-pdf" data-pdf="pdfs/Design Process.pdf">
       <div class="fw-card-inner">
         <div class="fw-photo">
           <img src="designthinking.png" alt="Design thinking process framework" />
@@ -513,7 +549,12 @@
           <p class="fw-pill">From problem to complete solution</p>
         </div>
       </div>
-    </article>
+    <div class="fw-overlay">
+    <span class="fw-cta">
+      VIEW CASE STUDY
+    </span>
+  </div>
+</article>
 
   </div>
 </section>
@@ -556,10 +597,24 @@
   </div>
 </section>
 
-
  
     </main>
   </div>
+  
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  const cards = document.querySelectorAll(".js-fw-pdf[data-pdf]");
+
+  cards.forEach(function(card){
+    card.style.cursor = "pointer"; // optional
+    card.addEventListener("click", function () {
+      const pdfLink = card.getAttribute("data-pdf");
+      window.open(pdfLink, "_blank"); // open in new tab
+    });
+  });
+});
+</script>
+
 
   <script src="script.js"></script>
   <script src="music.js"></script>
