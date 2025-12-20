@@ -54,6 +54,16 @@ body {
   margin-bottom: 32px;
 }
 
+.nav-case-study {
+  text-decoration: none;
+  color: #6c4cf0; /* your purple (change if needed) */
+}
+
+.nav-case-study:hover {
+  text-decoration: none;
+}
+
+
 .logo{
   text-decoration: none;
   color: var(--font-heading);
@@ -248,7 +258,9 @@ body {
   position: absolute;
   display: block;
   transform-origin: center;
-  filter: drop-shadow(0 16px 32px rgba(0, 0, 0, 0.17));
+   -webkit-user-drag: none;
+  user-select: none;
+  /* filter: drop-shadow(0 16px 32px rgba(0, 0, 0, 0.17)); */
 }
 
 /* Main purple note */
@@ -364,10 +376,6 @@ body {
   justify-content: center;
 }
 
-.lens-card:last-child {
-  margin-right: 0;
-}
-
 .lens-card img {
   width: 100%;
   height: 100%;
@@ -375,11 +383,10 @@ body {
 }
 
 /* Tilt sequence */
-.lens-card:nth-child(1) { transform: rotate(7deg); }
-.lens-card:nth-child(2) { transform: rotate(-8deg); }
-.lens-card:nth-child(3) { transform: rotate(7deg); }
-.lens-card:nth-child(4) { transform: rotate(-8deg); }
-.lens-card:nth-child(5) { transform: rotate(7deg); }
+/* Tilt pattern (works for infinite items, including duplicated loop) */
+.lens-card { transform: rotate(7deg); }
+.lens-card:nth-child(even) { transform: rotate(-8deg); }
+
 
 /* RESPONSIVE */
 
@@ -421,6 +428,23 @@ body {
   .lens-strip-wrapper {
     padding-inline: 8px;
   }
+
+  /* Smooth animation performance */
+.lens-strip-wrapper {
+  overflow: hidden;          /* keep hidden */
+}
+
+.lens-strip {
+  display: flex;
+  will-change: transform;    /* tell GPU we animate transform */
+  transform: translate3d(0,0,0);
+}
+
+.lens-card img {
+  backface-visibility: hidden;
+  transform: translateZ(0);
+}
+
 
   .lens-card {
     width: min(260px, 80vw);
@@ -524,6 +548,52 @@ body {
 /* Hover interaction */
 .case-card:hover .fw-overlay {
   opacity: 1;
+}
+
+/* ---- CASE STUDY OVERLAY: allow 2 CTAs side-by-side ---- */
+
+.fw-overlay {
+  /* keep your existing styles... */
+  pointer-events: none; /* stays none by default */
+}
+
+/* Enable interaction only while hovering the card */
+.fw-card:hover .fw-overlay,
+.case-card:hover .fw-overlay {
+  pointer-events: auto;
+}
+
+/* Make CTA clickable (yours currently has pointer-events:none) */
+.fw-cta {
+  pointer-events: auto;
+  text-decoration: none; /* because we’ll use <a> */
+}
+
+/* Row of 2 buttons */
+.fw-cta-row {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap; /* helps on small screens */
+  padding: 0 16px;
+}
+
+/* Secondary style for the Figma button */
+.fw-cta--ghost {
+  background: rgba(255,255,255,0.18);
+  border: 1px solid rgba(255,255,255,0.35);
+}
+
+/* Disabled "COMING SOON" pill */
+/* Force all disabled COMING SOON pills to look identical (same grey everywhere) */
+.fw-cta.is-disabled{
+  background: #E4E9ED;
+  border: 1px solid #C9D2DA;
+  color: rgba(0,0,0,0.55);
+  opacity: 1;              /* important: don't let opacity vary by background */
+  cursor: default;
+  pointer-events: none;    /* cannot click */
 }
 
 
@@ -1166,4 +1236,26 @@ body {
 
 .fw-card:hover .fw-cta {
   transform: translateY(0) scale(1);
+}
+
+/* Make overlay buttons clickable */
+.case-card:hover .fw-overlay {
+  pointer-events: auto;
+}
+
+.fw-cta {
+  pointer-events: auto;
+}
+
+.nav a,
+.nav-links a,
+header nav a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.nav a:hover,
+.nav-links a:hover,
+header nav a:hover {
+  text-decoration: none;
 }
