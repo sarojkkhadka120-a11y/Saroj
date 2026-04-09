@@ -1,0 +1,70 @@
+/* draggable.css – Interactive Hero Elements with Premium Physics */
+
+/* ── Default draggable state ──────────────────────────────────── */
+.hero-layer,
+.hero-avatar {
+  cursor: grab;
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-user-drag: none;
+  transition:
+    filter 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+    opacity 0.2s ease;
+}
+
+/* ── Hover feedback (desktop) ───────────────────────────────── */
+.hero-layer:hover,
+.hero-avatar:hover {
+  filter: drop-shadow(0 8px 18px rgba(0, 0, 0, 0.13));
+}
+
+/* ── Active dragging state ──────────────────────────────────── */
+.hero-layer.is-dragging,
+.hero-avatar.is-dragging {
+  cursor: grabbing;
+  z-index: 100 !important;
+  /* Disable CSS transition on transform so physics/drag feels instant */
+  transition: filter 0.15s ease, opacity 0.15s ease;
+  filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.28))
+          drop-shadow(0 4px 8px rgba(0, 0, 0, 0.12));
+  opacity: 0.97;
+}
+
+/* Override hover shadow during drag */
+.hero-layer.is-dragging:hover,
+.hero-avatar.is-dragging:hover {
+  filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.28))
+          drop-shadow(0 4px 8px rgba(0, 0, 0, 0.12));
+}
+
+/* ── Wall bounce pulse ──────────────────────────────────────── */
+.hero-layer.is-bouncing,
+.hero-avatar.is-bouncing {
+  filter: drop-shadow(0 6px 24px rgba(120, 80, 255, 0.25))
+          drop-shadow(0 2px 6px rgba(0, 0, 0, 0.10));
+}
+
+/* ── Momentum / post-drag glide ────────────────────────────── */
+/* While physics is animating (not dragging), keep z-index elevated */
+.hero-layer[data-animating="true"],
+.hero-avatar[data-animating="true"] {
+  z-index: 90 !important;
+}
+
+/* ── Mobile optimizations ───────────────────────────────────── */
+@media (max-width: 768px) {
+  .hero-layer.is-dragging,
+  .hero-avatar.is-dragging {
+    filter: drop-shadow(0 12px 24px rgba(0, 0, 0, 0.22));
+  }
+}
+
+/* ── Disable drag on very small screens ─────────────────────── */
+@media (max-width: 374px) {
+  .hero-layer,
+  .hero-avatar {
+    cursor: default;
+    touch-action: auto;
+  }
+}
